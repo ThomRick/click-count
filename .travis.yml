@@ -8,3 +8,4 @@ jdk:
 
 after_success:
   - docker build -t click-count .
+  - docker image ls
