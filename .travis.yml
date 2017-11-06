@@ -7,5 +7,14 @@ jdk:
   - oraclejdk8
 
 after_success:
-  - docker build -t click-count .
+  - docker build -t $DOCKER_USERNAME/click-count .
   - docker image ls
+
+deploy:
+ provider: script
+ skip_cleanup: true
+ script:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push $DOCKER_USERNAME/click-count
+ on:
+   branch: master
