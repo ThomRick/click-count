@@ -2,13 +2,8 @@ sudo: required
 services:
   - docker
 
-language: java
-jdk:
-  - oraclejdk8
-
-after_success:
-  - docker build -t $DOCKER_USERNAME/click-count .
-  - docker image ls
+script:
+  - docker build -t $DOCKER_USERNAME/click-count
 
 deploy:
  provider: script
@@ -16,3 +11,6 @@ deploy:
  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $DOCKER_USERNAME/click-count
  on:
    branch: master
+
+after_script:
+  docker image -ls
