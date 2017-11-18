@@ -1,3 +1,7 @@
 .idea/
+.vscode/
+
 target/
+.vagrant/
+
 *.iml
