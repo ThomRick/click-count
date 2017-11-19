@@ -4,23 +4,40 @@
 
 ## Processus
 
-### Step 1 : Analyse de l'état actuel
+### Step 1 : Build
 
-   - Il s'agit d'une application java utilisant le gestionnaire de dépendances maven.
-   - Le livrable resulant de la command ```maven clean install``` est un war.
-   - Le fichier travis.yml m'indique que Travis peut me servir de support pour gérer le build de l'application.
+Le choix retenu pour le livrable de l'application est un conteneur Docker.
+L'intérêt de ce choix est de fournir un livrable indépendant des librairies installées sur les machines hôtes de l'application tout en gardant un environnement de développement en adéquation avec le choix pris par les équipes de développement de l'application.
 
-### Step 2 : Adaptation du livrable de l'application - Approche container
- 
-   - Je construis une image docker s'appuyant sur l'image tomcat en guise de server d'applications pour le livrable final.
-   - Il en résulte que je dois adapter le fichier travis.yml afin de build l'image docker.
+### Step2 : Infrastructure
 
-### Step 3 : Mise en oeuvre du processus de build
- 
- Le build de l'application via Travis va donc se faire suivant les étapes:
- 
-   - ```maven clean install``` (pour obtenir le war)
-   - ```docker build .```      (pour obtenir l'image docker contenant le server d'application avec l'application)
-   
- Afin d'être plus flexible dans le processus de build nous allons utiliser un conteneur docker pour les 2 étapes du build.
- Le but étant d'être indépendant de la version de java installée sur la machine de build
+#### Schéma de l'infrastructure
+
+          - - - - - - - - - -
+          |                 |
+          |     BASTION     |
+          |                 |
+          - - - - - - - - - -
+                  |
+                  |
+          - - - - - - - - - -
+          |                 |
+          |                 |
+- - - - - - - - -   - - - - - - - - -
+|               |   |               |
+|    MASTER     |   |  PRODUCTION   |
+|               |   |               |
+- - - - - - - - -   - - - - - - - - -
+
+#### Fonctionnement de l'infrastructure
+
+  - Bastion :
+  Le bastion sera chargé de créer / mettre à jour les environnements et d'y deployer les applications.
+  Il contiendra les hooks nécessaires pour déployer les nouvelles versions de l'application.
+
+  - Master : 
+  Environnement contenant la version en cours de qualification de l'application.
+  L'accès à cet environnement se fera dans un cadre interne à l'entreprise développant la solution.
+
+  - Production :
+  Environnement contenant la version en cours d'utilisation.
