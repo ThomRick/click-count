@@ -17,4 +17,4 @@ deploy:
    branch: master
 
 after_script:
-  - docker image -ls
+  - docker image ls
