@@ -13,16 +13,6 @@ L'intérêt de ce choix est de fournir un livrable indépendant des librairies i
 
 #### Schéma de l'infrastructure
 
-          - - - - - - - - - -
-          |                 |
-          |     BASTION     |
-          |                 |
-          - - - - - - - - - -
-                  |
-                  |
-          - - - - - - - - - -
-          |                 |
-          |                 |
 - - - - - - - - -   - - - - - - - - -
 |               |   |               |
 |    MASTER     |   |  PRODUCTION   |
@@ -30,10 +20,6 @@ L'intérêt de ce choix est de fournir un livrable indépendant des librairies i
 - - - - - - - - -   - - - - - - - - -
 
 #### Fonctionnement de l'infrastructure
-
-  - Bastion :
-  Le bastion sera chargé de créer / mettre à jour les environnements et d'y déployer les applications.
-  Il contiendra les hooks nécessaires pour déployer les nouvelles versions de l'application.
 
   - Master : 
   Environnement contenant la version en cours de qualification de l'application.
