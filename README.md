@@ -26,4 +26,4 @@ L'intérêt de ce choix est de fournir un livrable indépendant des librairies i
   L'accès à cet environnement se fera dans un cadre interne à l'entreprise développant la solution.
 
   - Production :
-  Environnement contenant la version en cours d'utilisation.
+  Environnement contenant la denière version publique en cours d'utilisation.
