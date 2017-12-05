@@ -16,11 +16,5 @@ Vagrant.configure("2") do |config|
         args: "-p 8080:8080 --add-host redis:192.168.0.1"
     end
     node.vm.network "forwarded_port", guest: 8080, host: 8080
-    node.vm.network :private_network, :ip => "192.168.0.2"
-    node.vm.provision :hosts do |provisioner|
-      provisioner.autoconfigure = true
-      provisioner.sync_hosts = true
-      provisioner.add_host "192.168.0.1", [ "redis" ]
-    end
   end
 end
