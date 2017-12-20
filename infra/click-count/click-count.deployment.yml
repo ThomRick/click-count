@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: click-count
+  namespace: default
+  labels:
+    k8s-app: simple
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        k8s-app: simple
+    spec:
+      containers:
+        - name: click-count
+          image: thomrick/click-count
+          env:
+            - name: REDIS_HOST
+              value: redis
+          ports:
+            - name: http
+              containerPort: 8080
