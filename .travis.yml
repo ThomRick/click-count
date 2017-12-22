@@ -6,15 +6,16 @@ before_install:
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
-script:
-  - docker build -t $DOCKER_USERNAME/click-count .
-
-deploy:
- provider: script
- skip_cleanup: true
- script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $DOCKER_USERNAME/click-count
- on:
-   branch: master
-
-after_script:
-  - docker image ls
+jobs:
+  include:
+    - stage: build
+      script: docker build -t $DOCKER_USERNAME/click-count .
+    - stage: publish
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $DOCKER_USERNAME/click-count
+        on:
+          branch: master
+          
