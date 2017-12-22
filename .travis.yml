@@ -10,8 +10,6 @@ jobs:
   include:
     - stage: build
       script: docker build -t $DOCKER_USERNAME/click-count .
-    - stage: publish
-      script: skip
       deploy:
         provider: script
         skip_cleanup: true
