@@ -9,12 +9,12 @@ before_install:
 jobs:
   include:
     - stage: build
-      script: docker build -t $DOCKER_USERNAME/click-count .
+      script: docker build -t $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT .
       deploy:
         provider: script
         skip_cleanup: true
         script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" 
-        script: docker push "$DOCKER_USERNAME/click-count:$TRAVIS_COMMIT"
+        script: docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
         on:
           branch: master
     - stage: deploy
