@@ -16,4 +16,6 @@ jobs:
         script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $DOCKER_USERNAME/click-count
         on:
           branch: master
+    - stage: deploy
+      script: echo "$TRAVIS_COMMIT"
           
