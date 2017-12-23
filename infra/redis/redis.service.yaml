@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: redis
-  namespace: default
 spec:
   selector:
     k8s-app: simple

@@ -2,11 +2,11 @@ kind: Service
 apiVersion: v1
 metadata:
   name: click-count
-  namespace: default
 spec:
   selector:
     k8s-app: simple
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
+    targetPort: 8080
   type: LoadBalancer

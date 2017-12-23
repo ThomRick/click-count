@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: redis
-  namespace: default
   labels:
     k8s-app: simple
 spec:
