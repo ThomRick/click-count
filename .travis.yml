@@ -13,8 +13,7 @@ jobs:
       deploy:
         provider: script
         skip_cleanup: true
-        script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" 
-        script: docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
+        script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
         on:
           branch: master
     - stage: deploy
