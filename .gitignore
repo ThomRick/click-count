@@ -8,3 +8,5 @@ target/
 .vagrant/
 
 *.iml
+
+infra/travis-credentials.json
