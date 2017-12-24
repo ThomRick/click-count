@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    /* appearance: none; */
+    width: 100px;
+    height: 30px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    text-transform: uppercase;
+    background-color: greenyellow;
+    margin-top: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 20px;
+    background-color: white;
+    text-transform: capitalize;
+}
