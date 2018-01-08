@@ -14,5 +14,4 @@ mv ./01-infrastructure/terraform.tfvars ./02-applications/terraform.tfvars
 
 cd 02-applications
 echo "- - - - inside 02-applications - - - -"
-cat terraform.tfvars
 ./main.sh ${ENVIRONMENT} ${VERSION}
