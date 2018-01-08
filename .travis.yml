@@ -12,21 +12,13 @@ before_install:
 jobs:
   include:
   - stage: build
-    script: docker build -t $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT .
-    deploy:
-      provider: script
-      skip_cleanup: true
-      script:
-        - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-        - docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
-      on:
-        branch: master
+    script:
+      - docker build -t $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT .
+      - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+      - docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
 
   - stage: deploy
-    script: docker build -t $DOCKER_USERNAME/click-count-infra infra
-    deploy:
-      provider: script
-      skip_cleanup: true
-      script: docker run $DOCKER_USERNAME/click-count-infra staging $TRAVIS_COMMIT
-      on:
-        branch: master
+    script:
+      - docker build -t $DOCKER_USERNAME/click-count-infra infra
+      - docker run $DOCKER_USERNAME/click-count-infra staging $TRAVIS_COMMIT
+      
