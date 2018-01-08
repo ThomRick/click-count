@@ -1,10 +1,12 @@
 sudo: required
 services:
-- docker
+  - docker
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv -in terraform.json.enc -out infra/credentials/terraform.json -d
-- sudo apt-get update
-- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv -in terraform.json.enc -out infra/credentials/terraform.json -d
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  
 jobs:
   include:
   - stage: build
@@ -13,13 +15,13 @@ jobs:
       provider: script
       skip_cleanup: true
       script:
-      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-      - docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
+        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+        - docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
       on:
         branch: master
+
   - stage: deploy
-    script:
-    - docker build -t $DOCKER_USERNAME/click-count-infra infra
+    script: docker build -t $DOCKER_USERNAME/click-count-infra infra
     deploy:
       provider: script
       skip_cleanup: true
