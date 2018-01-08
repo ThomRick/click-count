@@ -9,12 +9,10 @@
 Le choix retenu pour le livrable de l'application est un container Docker.
 L'intérêt de ce choix est de fournir un livrable indépendant des librairies installées sur les machines hôtes de l'application tout en gardant un environnement de développement en adéquation avec le choix pris par les équipes de développement de l'application.
 
-### Step2 : Infrastructure
+### Step 2 : Infrastructure
 
 Le choix technologique pour l'infrastructure est de déployer le container Docker de l'application dans un cluster Kubernetes déployé par le biais du provider cloud Google Cloud Platform.
 L'infrastructure as code s'appuie sur la technologie terraform.
-
-#### Deploiement continu
 
 * Les ressources :
     * Une zone DNS
@@ -23,7 +21,9 @@ L'infrastructure as code s'appuie sur la technologie terraform.
     * Un cluster Kubernetes
     * Par branch :
         * Un Pod exécutant un container Redis avec son service NodePort associé.
-        * Un Pod exécutant le container de l'application click-count et son service LoadBalancer associé. 
+        * Un Pod exécutant le container de l'application click-count et son service LoadBalancer associé.
+         
+#### Step 3 : Deploiement continu
 
 * Hooks :
     * A chaque commit de code sur le repository GitHub de l'application, un job de build est déclenché sur Travis CI.
