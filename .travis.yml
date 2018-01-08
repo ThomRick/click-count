@@ -2,10 +2,7 @@ sudo: required
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv
-  -in infra/credentials/travis.json.enc -out infra/credentials/travis.json -d
-- openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv
-  -in infra/credentials/terraform.json.enc -out infra/credentials/terraform.json -d
+- openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv -in infra/credentials/terraform.json.enc -out infra/credentials/terraform.json -d
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 jobs:
