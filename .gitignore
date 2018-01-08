@@ -3,10 +3,11 @@
 .settings/
 .classpath
 .project
-
-target/
 .vagrant/
-
 *.iml
 
-infra/travis-credentials.json
+target/
+
+infra/credentials/travis.json
+infra/credentials/terraform.json
+infra/playbooks/.terraform

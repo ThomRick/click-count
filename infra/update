@@ -1,8 +1,0 @@
-#!/bin/sh
-VERSION=$1
-gcloud auth activate-service-account --key-file credentials.json
-gcloud config set project xebia-veille
-gcloud container clusters get-credentials --zone=europe-west1-d click-count
-echo "apply new click-count deployment version : $VERSION"
-sed -i.bak s/{{VERSION}}/$VERSION/g click-count/click-count.deployment.yaml
-kubectl apply -f click-count/click-count.deployment.yaml
