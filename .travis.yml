@@ -1,4 +1,6 @@
 sudo: required
+dist: trusty
+group: deprecated-2017Q4
 services:
   - docker
 
@@ -6,7 +8,7 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_ee54fff58d9c_key -iv $encrypted_ee54fff58d9c_iv -in terraform.json.enc -out infra/credentials/terraform.json -d
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  
+
 jobs:
   include:
   - stage: build
@@ -15,7 +17,7 @@ jobs:
       provider: script
       skip_cleanup: true
       script:
-        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+        - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
         - docker push $DOCKER_USERNAME/click-count:$TRAVIS_COMMIT
       on:
         branch: master
