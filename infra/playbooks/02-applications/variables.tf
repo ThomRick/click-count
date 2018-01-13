@@ -1,12 +1,6 @@
-variable "environment" {
-  description = "Environment name"
-  default = "staging"
-}
-
-variable "version" {
-  description = "Application version"
-  default = "latest"
-}
+variable "environment" {}
+variable "branch" {}
+variable "version" {}
 
 variable "cluster_host" {}
 variable "cluster_username" {}

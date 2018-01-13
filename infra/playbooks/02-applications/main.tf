@@ -15,11 +15,11 @@ provider "kubernetes" {
 
 resource "kubernetes_service" "redis" {
   metadata {
-    name = "redis"
+    name = "${var.branch}-redis"
   }
   spec {
     selector {
-      k8s-app = "simple"
+      k8s-app = "${var.branch}"
     }
     port {
       port = 6379
@@ -30,9 +30,9 @@ resource "kubernetes_service" "redis" {
 
 resource "kubernetes_pod" "redis" {
   metadata {
-    name = "redis"
+    name = "${var.branch}-redis"
     labels {
-      k8s-app = "simple"
+      k8s-app = "${var.branch}"
     }
   }
   spec {
@@ -48,11 +48,11 @@ resource "kubernetes_pod" "redis" {
 
 resource "kubernetes_service" "click-count" {
   metadata {
-    name = "click-count"
+    name = "${var.branch}-click-count"
   }
   spec {
     selector {
-      k8s-app = "simple"
+      k8s-app = "${var.branch}"
     }
     port {
       port        = 80
@@ -64,9 +64,9 @@ resource "kubernetes_service" "click-count" {
 
 resource "kubernetes_pod" "click-count" {
   metadata {
-    name = "click-count"
+    name = "${var.branch}-click-count"
     labels {
-      k8s-app = "simple"
+      k8s-app = "${var.branch}"
     }
   }
   spec {
@@ -78,7 +78,7 @@ resource "kubernetes_pod" "click-count" {
       }
       env {
         name  = "REDIS_HOST"
-        value = "redis"
+        value = "${var.branch}-redis"
       }
     }
   }
@@ -86,7 +86,7 @@ resource "kubernetes_pod" "click-count" {
 
 resource "google_dns_record_set" "record" {
   managed_zone = "${var.dns_zone_name}"
-  name         = "${var.environment}.click-count.${var.dns_zone_dns_name}"
+  name         = "${var.branch}.click-count.${var.dns_zone_dns_name}"
   type         = "A"
   ttl          = 300
   rrdatas      = [
@@ -96,7 +96,7 @@ resource "google_dns_record_set" "record" {
 
 resource "google_dns_record_set" "cname" {
   managed_zone = "${var.dns_zone_name}"
-  name         = "www.${var.environment}.click-count.${var.dns_zone_dns_name}"
+  name         = "www.${var.branch}.click-count.${var.dns_zone_dns_name}"
   type         = "CNAME"
   ttl          = 300
   rrdatas      = [
