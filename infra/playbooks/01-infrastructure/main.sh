@@ -1,7 +1,6 @@
 #!/bin/sh
 
 ENVIRONMENT=$1
-VERSION=$2
 
 rm -rf ./.terraform/
 rm -rf terraform.tfstate
@@ -20,7 +19,7 @@ terraform output -state=terraform.tfstate >> terraform.tmp
 awk '{split($0, tab, " = "); printf("%s = \"%s\"\n", tab[1], tab[2])}' terraform.tmp >> terraform.tfvars
 rm -rf terraform.tmp
 
-terraform plan -detailed-exitcode -out=config.tfplan -var environment=${ENVIRONMENT} -var version=${VERSION}
+terraform plan -detailed-exitcode -out=config.tfplan -var environment=${ENVIRONMENT}
 if [ $? == 2 ]
 then
     echo "apply terraform plan to build infrastructure"

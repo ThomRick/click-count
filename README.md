@@ -42,11 +42,13 @@ L'infrastructure as code s'appuie sur la technologie terraform.
 L'ensemble des ressources de peuvent pas être importés à l'aide des versions actuelles des providers utilisés.
 Il a donc été nécessaire de construire les providers contenant les versions (en cours de développement) de ces providers.
 
-* La technologie terraform ne permet pas d'utiliser les fonctionnalités beta des ressources Kubernetes (cf. Deployement).
+* La technologie terraform ne permet pas d'utiliser les fonctionnalités beta des ressources Kubernetes (cf. Deployment).
 
 ## Next Steps :
 
 * Utilisation de Helm pour déployer les applications sur le cluster Kubernetes
-* Déployement par branch
+* Deployment par branch
+* Mettre en place un système de promote
+* Détruire l'environnement (branch) lors d'une pull request 
 * Sauvegarder le state de l'infrastructure en remote
 * Ajouter un hook de commit pour créer ou non un nouvel environnement / version

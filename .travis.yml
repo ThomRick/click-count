@@ -20,4 +20,4 @@ jobs:
   - stage: deploy
     script:
       - docker build -t $DOCKER_USERNAME/click-count-infra infra
-      - docker run $DOCKER_USERNAME/click-count-infra staging $TRAVIS_COMMIT
+      - docker run $DOCKER_USERNAME/click-count-infra staging $TRAVIS_BRANCH $TRAVIS_COMMIT
