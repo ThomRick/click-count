@@ -16,8 +16,8 @@ L'infrastructure as code s'appuie sur la technologie terraform.
 
 * Les ressources :
     * Une zone DNS
-    * Un DNS record A pour lié l'addresse IP du load balancer de l'application à un sous domaine rattaché à la zone DNS.
-    * Un DNS record CNAME pour exposer l'application sur internet par le biais du sous domaine.
+    * Un DNS record A pour lié l'addresse IP du load balancer de l'application à un sous domain rattaché à la zone DNS.
+    * Un DNS record CNAME pour exposer l'application sur internet par le biais du sous domain.
     * Un cluster Kubernetes
     * Par branch :
         * Un Pod exécutant un container Redis avec son service NodePort associé.
@@ -34,12 +34,17 @@ L'infrastructure as code s'appuie sur la technologie terraform.
 * Le déploiement sur l'environnement de production se produit par l'action d'un utilisateur.
 * Pour se faire l'utilisateur doit construire le container Docker infra et l'exécuter avec les arguments ``` production ${VERSION} ```
 
-### Difficultés rencontrées :
+## Difficultés rencontrées :
 
 #### Technologie Terraform :
 
 * Pour mettre à jour l'infrastructure sur un environnement la méthode de récupération de l'état courant est d'importer les ressources.
-L'ensemble des ressources de peuvent pas être importés à l'aide des dernières versions actuelles des providers utilisés.
+L'ensemble des ressources de peuvent pas être importés à l'aide des versions actuelles des providers utilisés.
 Il a donc été nécessaire de construire les providers contenant les versions (en cours de développement) de ces providers.
 
-* La technologie terraform ne permet pas d'utiliser les fonctionnalités beta des ressources Kubernetes (cf. Deployement). 
+* La technologie terraform ne permet pas d'utiliser les fonctionnalités beta des ressources Kubernetes (cf. Deployement).
+
+## Next Steps :
+
+* Utilisation de Helm pour déployer les applications sur le cluster Kubernetes
+* Déployement par branch
