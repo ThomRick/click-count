@@ -11,11 +11,11 @@ rm -rf config.tfplan
 
 terraform init -plugin-dir=/usr/local/.terraform.d/plugins/
 
-terraform import kubernetes_service.redis default/redis
-terraform import kubernetes_pod.redis default/redis
+terraform import kubernetes_service.redis default/${BRANCH}-redis
+terraform import kubernetes_pod.redis default/${BRANCH}-redis
 
-terraform import kubernetes_service.click-count default/click-count
-terraform import kubernetes_pod.click-count default/click-count
+terraform import kubernetes_service.click-count default/${BRANCH}-click-count
+terraform import kubernetes_pod.click-count default/${BRANCH}-click-count
 
 terraform import google_dns_record_set.record ${ENVIRONMENT}/${BRANCH}.click-count.thomrick.com./A
 terraform import google_dns_record_set.cname ${ENVIRONMENT}/www.${BRANCH}.click-count.thomrick.com./CNAME
