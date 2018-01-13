@@ -48,3 +48,5 @@ Il a donc été nécessaire de construire les providers contenant les versions (
 
 * Utilisation de Helm pour déployer les applications sur le cluster Kubernetes
 * Déployement par branch
+* Sauvegarder le state de l'infrastructure en remote
+* Ajouter un hook de commit pour créer ou non un nouvel environnement / version
